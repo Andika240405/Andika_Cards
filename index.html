@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Lebaran - Tangkap Bintang & Ketupat</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Eksternal -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container" id="gameContainer">
+        <!-- Background layers -->
+        <div class="sky-background"></div>
+        <div class="stars-layer" id="starsLayer"></div>
+        
+        <div class="moon-container">
+            <div class="moon">
+                <div class="moon-crescent"></div>
+                <div class="moon-shadow"></div>
+            </div>
+            <svg class="moon-star" viewBox="0 0 20 20">
+                <polygon points="10,0 12.5,7.5 20,7.5 14,12 16.5,20 10,15 3.5,20 6,12 0,7.5 7.5,7.5" fill="#f0d77c"/>
+            </svg>
+        </div>
+        
+        <div class="clouds-layer">
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+        </div>
+        
+        <div class="mosque-silhouette">
+            <svg class="mosque-svg" viewBox="0 0 600 180" preserveAspectRatio="xMidYMax slice">
+                <path d="M250,180 L250,80 Q300,20 350,80 L350,180 Z" fill="#0a4d2e"/>
+                <path d="M80,180 L80,50 Q100,10 120,50 L120,180 Z" fill="#0a4d2e"/>
+                <circle cx="100" cy="50" r="15" fill="#0a4d2e"/>
+                <path d="M480,180 L480,50 Q500,10 520,50 L520,180 Z" fill="#0a4d2e"/>
+                <circle cx="500" cy="50" r="15" fill="#0a4d2e"/>
+                <path d="M160,180 L160,120 Q180,90 200,120 L200,180 Z" fill="#0a4d2e"/>
+                <path d="M400,180 L400,120 Q420,90 440,120 L440,180 Z" fill="#0a4d2e"/>
+                <rect x="140" y="140" width="320" height="40" fill="#0a4d2e"/>
+                <path d="M280,180 L280,150 Q300,130 320,150 L320,180 Z" fill="#0a1628"/>
+                <rect x="180" y="150" width="20" height="25" rx="10" fill="#0a1628"/>
+                <rect x="400" y="150" width="20" height="25" rx="10" fill="#0a1628"/>
+            </svg>
+        </div>
+        
+        <div class="geometric-pattern"></div>
+        
+        <div class="ambient-glow">
+            <div class="glow-orb glow-gold"></div>
+            <div class="glow-orb glow-green"></div>
+            <div class="glow-orb glow-cream"></div>
+        </div>
+        
+        <div class="lanterns-container" id="lanternsContainer"></div>
+        
+        <svg class="ketupat-bg ketupat-float" style="left: 5%; top: 30%;" width="60" height="60" viewBox="0 0 60 60">
+            <polygon points="30,5 55,30 30,55 5,30" fill="none" stroke="#d4a843" stroke-width="2"/>
+            <line x1="30" y1="5" x2="30" y2="55" stroke="#d4a843" stroke-width="1"/>
+            <line x1="5" y1="30" x2="55" y2="30" stroke="#d4a843" stroke-width="1"/>
+        </svg>
+        <svg class="ketupat-bg ketupat-float" style="right: 8%; top: 40%; animation-delay: -4s;" width="50" height="50" viewBox="0 0 60 60">
+            <polygon points="30,5 55,30 30,55 5,30" fill="none" stroke="#d4a843" stroke-width="2"/>
+            <line x1="30" y1="5" x2="30" y2="55" stroke="#d4a843" stroke-width="1"/>
+            <line x1="5" y1="30" x2="55" y2="30" stroke="#d4a843" stroke-width="1"/>
+        </svg>
+        
+        <div class="ground-decoration">
+            <div class="ground-pattern"></div>
+        </div>
+        
+        <div class="shooting-star" id="shootingStar1"></div>
+        <div class="shooting-star" id="shootingStar2"></div>
+
+        <div class="particles" id="particles"></div>
+
+        <svg class="decoration lamp-string" viewBox="0 0 800 60" preserveAspectRatio="none">
+            <path d="M0,5 Q200,50 400,5 Q600,50 800,5" stroke="#d4a843" stroke-width="3" fill="none"/>
+            <g class="lamp" style="left: 12.5%; top: 20px;">
+                <line x1="100" y1="20" x2="100" y2="40" stroke="#d4a843" stroke-width="2"/>
+                <ellipse cx="100" cy="48" rx="12" ry="10" fill="#f0d77c" opacity="0.9"/>
+                <ellipse cx="100" cy="48" rx="8" ry="6" fill="#fffbe6"/>
+            </g>
+            <g class="lamp" style="animation-delay: 0.5s;">
+                <line x1="250" y1="35" x2="250" y2="40" stroke="#d4a843" stroke-width="2"/>
+                <ellipse cx="250" cy="48" rx="12" ry="10" fill="#f0d77c" opacity="0.9"/>
+                <ellipse cx="250" cy="48" rx="8" ry="6" fill="#fffbe6"/>
+            </g>
+            <g class="lamp" style="animation-delay: 1s;">
+                <line x1="400" y1="20" x2="400" y2="40" stroke="#d4a843" stroke-width="2"/>
+                <ellipse cx="400" cy="48" rx="12" ry="10" fill="#f0d77c" opacity="0.9"/>
+                <ellipse cx="400" cy="48" rx="8" ry="6" fill="#fffbe6"/>
+            </g>
+        </svg>
+
+        <div class="torch torch-left">
+            <svg class="torch-flame" viewBox="0 0 30 45">
+                <ellipse cx="15" cy="25" rx="12" ry="18" fill="#ff6b35" opacity="0.9"/>
+                <ellipse cx="15" cy="22" rx="8" ry="14" fill="#ffb347"/>
+            </svg>
+            <svg viewBox="0 0 60 80" style="position: absolute; top: 40px;">
+                <rect x="25" y="0" width="10" height="60" fill="#8b4513"/>
+                <rect x="20" y="55" width="20" height="25" fill="#654321"/>
+            </svg>
+        </div>
+        <div class="torch torch-right">
+            <svg class="torch-flame" viewBox="0 0 30 45">
+                <ellipse cx="15" cy="25" rx="12" ry="18" fill="#ff6b35" opacity="0.9"/>
+                <ellipse cx="15" cy="22" rx="8" ry="14" fill="#ffb347"/>
+            </svg>
+            <svg viewBox="0 0 60 80" style="position: absolute; top: 40px;">
+                <rect x="25" y="0" width="10" height="60" fill="#8b4513"/>
+                <rect x="20" y="55" width="20" height="25" fill="#654321"/>
+            </svg>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div class="game-ui">
+            <div class="ui-left">
+                <div class="ui-box" id="scoreBox">
+                    <span>Skor</span>
+                    <div class="value" id="scoreDisplay">0</div>
+                </div>
+                <div class="ui-box combo-box" id="comboBox">
+                    <span>Combo</span>
+                    <div class="value" id="comboDisplay">x1</div>
+                </div>
+            </div>
+            <div class="ui-right">
+                <div class="ui-box" id="timeBox">
+                    <span>Waktu</span>
+                    <div class="value" id="timeDisplay">30</div>
+                </div>
+                <div class="ui-box lives-box" id="livesBox">
+                    <span>Nyawa</span>
+                    <div class="value" id="livesDisplay">3</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="powerup-display" id="powerupDisplay">
+            <div class="powerup-icon shield" id="shieldIcon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span class="powerup-timer" id="shieldTimer"></span>
+            </div>
+            <div class="powerup-icon magnet" id="magnetIcon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 15V9a6 6 0 0 1 12 0v6"/>
+                    <path d="M6 9h2v6H6zM16 9h2v6h-2z"/>
+                </svg>
+                <span class="powerup-timer" id="magnetTimer"></span>
+            </div>
+            <div class="powerup-icon double" id="doubleIcon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v12M6 12h12"/>
+                </svg>
+                <span class="powerup-timer" id="doubleTimer"></span>
+            </div>
+            <div class="powerup-icon slowmo" id="slowmoIcon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+                <span class="powerup-timer" id="slowmoTimer"></span>
+            </div>
+        </div>
+        
+        <button class="pause-btn" id="pauseBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16"/>
+                <rect x="14" y="4" width="4" height="16"/>
+            </svg>
+        </button>
+
+        <svg class="player-basket" id="playerBasket" viewBox="0 0 80 50">
+            <path d="M5,5 L10,45 Q40,55 70,45 L75,5 Q40,15 5,5" fill="#8b4513" stroke="#5c3d2e" stroke-width="2"/>
+            <path d="M10,10 L13,40 Q40,48 67,40 L70,10 Q40,18 10,10" fill="#a0522d"/>
+            <path d="M5,5 Q40,15 75,5" fill="none" stroke="#d4a843" stroke-width="3"/>
+            <ellipse cx="40" cy="5" rx="35" ry="8" fill="#d4a843" opacity="0.3"/>
+        </svg>
+
+        <!-- Start Screen -->
+        <div class="screen-overlay" id="startScreen">
+            <h1 class="title">Selamat Lebaran</h1>
+            <p class="subtitle">Tangkap Bintang dan Ketupat!</p>
+            
+            <div class="high-score-display" id="highScoreDisplay">
+                High Score: <span id="highScoreValue">0</span>
+            </div>
+            
+            <div class="difficulty-selector" id="difficultySelector">
+                <button class="diff-btn easy" data-diff="easy">Mudah</button>
+                <button class="diff-btn normal selected" data-diff="normal">Normal</button>
+                <button class="diff-btn hard" data-diff="hard">Sulit</button>
+            </div>
+            
+            <div class="instructions">
+                <h3>Cara Bermain</h3>
+                <ul>
+                    <li><span class="icon">⭐</span> Bintang = +10 poin</li>
+                    <li><span class="icon">🌟</span> Golden Star = +25 poin</li>
+                    <li><span class="icon">🟩</span> Ketupat = +15 poin</li>
+                    <li><span class="icon">💎</span> Golden Ketupat = +40 poin</li>
+                    <li><span class="icon">💣</span> Bom = Hilang 1 Nyawa</li>
+                    <li><span class="icon">🎁</span> Power-up: Shield, Magnet, 2X, Slow</li>
+                </ul>
+            </div>
+            <p class="target-score" id="targetScoreText">Durasi 30 detik | Target: 75 poin</p>
+            <button class="btn" id="startBtn">Mulai Bermain</button>
+        </div>
+
+        <!-- Pause Screen -->
+        <div class="screen-overlay hidden" id="pauseScreen">
+            <div class="pause-menu">
+                <h2>Permainan Dijeda</h2>
+                <div class="pause-stats">
+                    <p>Skor: <strong id="pauseScore">0</strong></p>
+                    <p>Combo: <strong id="pauseCombo">x1</strong></p>
+                    <p>Waktu: <strong id="pauseTime">30</strong> detik</p>
+                </div>
+                <div class="pause-btns">
+                    <button class="btn" id="resumeBtn">Lanjutkan</button>
+                    <button class="btn" id="quitBtn" style="background: linear-gradient(135deg, #e63946 0%, #a61b29 100%);">Keluar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Win Screen -->
+        <div class="screen-overlay hidden" id="winScreen">
+            <div class="envelope-wrapper" id="envelopeWrapper">
+                <div class="envelope">
+                    <div class="envelope-back"></div>
+                    
+                    <div class="eid-card" id="eidCard">
+                        <p class="arabic">عيد الفطر مبارك</p>
+                        <h2>Eid Fitri Mubarak</h2>
+                        <h3>Selamat Hari Raya</h3>
+                        <p class="message">
+                            Selamat! Kamu memenangkan permainan!<br>
+                            Semoga lebaran membawa keberkahan dan kebahagiaan.
+                        </p>
+                        <div class="new-highscore hidden" id="newHighscoreBadge">NEW HIGH SCORE!</div>
+                        <div class="score-display-final">Skor Akhir: <span id="finalScore">0</span></div>
+                        <br>
+                        <button class="btn" id="replayWinBtn">Main Lagi</button>
+                    </div>
+
+                    <div class="envelope-front"></div>
+                    <div class="envelope-flap" id="envelopeFlap"></div>
+                </div>
+                <p class="click-hint" id="clickHint">Ketuk Amplop Dari Andika Untuk Membuka!</p>
+            </div>
+        </div>
+
+        <!-- Lose Screen -->
+        <div class="screen-overlay lose-screen hidden" id="loseScreen">
+            <div class="eid-card" style="margin-top: 20px;">
+                <h2>Permainan Selesai</h2>
+                <h3>Nyawa Habis</h3>
+                <p class="message">
+                    Sayang sekali! Nyawa kamu sudah habis.<br>
+                    Ayo coba lagi untuk membuka Amplop Lebaran!
+                </p>
+                <div class="new-highscore hidden" id="newHighscoreBadgeLose">NEW HIGH SCORE!</div>
+                <div class="score-display-final">Skor Kamu: <span id="loseScore">0</span></div>
+                <br>
+                <button class="btn" id="replayLoseBtn">Coba Lagi</button>
+            </div>
+        </div>
+
+        <!-- Time Up Screen -->
+        <div class="screen-overlay lose-screen hidden" id="timeUpScreen">
+            <div class="eid-card" style="margin-top: 20px;">
+                <h2>Waktu Habis</h2>
+                <h3>Skor Belum Cukup</h3>
+                <p class="message">
+                    Sayang sekali! Skor kamu belum mencapai target.<br>
+                    Ayo coba lagi untuk membuka Amplop Lebaran!
+                </p>
+                <div class="new-highscore hidden" id="newHighscoreBadgeTimeUp">NEW HIGH SCORE!</div>
+                <div class="score-display-final">Skor Kamu: <span id="timeUpScore">0</span></div>
+                <br>
+                <button class="btn" id="replayTimeUpBtn">Coba Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Eksternal -->
+    <script src="js/script.js"></script>
+</body>
+</html>
